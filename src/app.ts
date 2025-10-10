@@ -2,6 +2,8 @@ import express, { Request, Response } from 'express';
 import cors from "cors"
 import compression from "compression"
 import { blogRouter } from './app/modules/blog/blog.routes';
+import notFoundRoute from './app/middlewares/notFoundRoute';
+import { globalErrorHandler } from './app/middlewares/globalErrorHandler';
 
 const app = express();
 
@@ -22,5 +24,9 @@ app.get("/", (req: Request, res: Response) => {
           message: "Welcome to My Portfolio Website"
      })
 })
+
+app.use(globalErrorHandler)
+
+app.use(notFoundRoute)
 
 export default app;
