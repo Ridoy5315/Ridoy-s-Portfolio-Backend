@@ -21,7 +21,7 @@ const startServer = async () => {
   try {
      await connectToDB();
     server = app.listen(envVars.PORT, () => {
-      console.log(`Server is listening to port 5000 ${envVars.PORT}`);
+      console.log(`Server is listening to port ${envVars.PORT}`);
     });
   } catch (error) {
     console.log(error);

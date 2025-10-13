@@ -15,11 +15,11 @@ app.use(
   })
 );
 
-app.use(compression);
+app.use(compression());
 app.use(express.json());
 
-app.use("/api/v1/user", blogRouter);
-app.use("/api/v1/auth", authRouter);
+app.use("/api/blog", blogRouter);
+app.use("/api/auth", authRouter);
 
 app.get("/", (req: Request, res: Response) => {
      res.status(200).json({

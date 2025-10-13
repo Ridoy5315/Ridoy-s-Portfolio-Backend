@@ -7,19 +7,19 @@ import { verifyToken } from "../utils/jwt";
 import { prisma } from "../config/db";
 
 export const checkAuth =
-  (...authRoles: string[]) =>
+  () =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const accessToken = req.headers.authorization || req.cookies.accessToken;
+      // const accessToken = req.headers.authorization || req.cookies.accessToken;
 
-      if (!accessToken) {
-        throw new AppError(httpStatus.BAD_REQUEST, "No Token Received");
-      }
+      // if (!accessToken) {
+      //   throw new AppError(httpStatus.BAD_REQUEST, "No Token Received");
+      // }
 
-      const verifiedToken = verifyToken(
-        accessToken,
-        envVars.JWT_ACCESS_SECRET
-      ) as JwtPayload;
+      // const verifiedToken = verifyToken(
+      //   accessToken,
+      //   envVars.JWT_ACCESS_SECRET
+      // ) as JwtPayload;
 
       const isUserExist = await prisma.user.findFirst({
         where: {
@@ -33,14 +33,14 @@ export const checkAuth =
         }
       }
 
-      if (!authRoles.includes(verifiedToken.role)) {
+      if (isUserExist?.role !== "OWNER") {
         throw new AppError(
           httpStatus.BAD_REQUEST,
           "You are not permitted to view this route!!!"
         );
       }
 
-      req.user = verifiedToken;
+      // req.user = verifiedToken;
 
       next();
       

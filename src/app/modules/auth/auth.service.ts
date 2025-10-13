@@ -2,8 +2,6 @@ import bcryptjs from "bcryptjs";
 import httpStatus from "http-status-codes";
 import { prisma } from "../../config/db";
 import AppError from "../../errorHelpers/AppError";
-import { createUserTokens } from "../../utils/userTokens";
-import { setAuthCookies } from "../../utils/setCookies";
 import { Response } from "express";
 
 const loginWithEmailAndPassword = async (
@@ -34,17 +32,10 @@ const loginWithEmailAndPassword = async (
     throw new Error("Password is incorrect!");
   }
 
-  const userTokens = await createUserTokens(user);
-
-  setAuthCookies(res, userTokens);
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { password: pass, ...rest } = user;
 
-  return {
-    user: rest,
-    userTokens,
-  };
+  return rest;
 };
 
 export const AuthService = {

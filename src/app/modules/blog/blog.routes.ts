@@ -10,9 +10,8 @@ const router = express.Router();
 
 router.post(
   "/",
-  checkAuth(Role.OWNER),
+  checkAuth(),
   multerUpload.single("file"),
-  validateRequest(createBlogSchema),
   BlogController.createBlog
 );
 

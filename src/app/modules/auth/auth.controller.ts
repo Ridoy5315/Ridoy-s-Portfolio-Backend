@@ -8,15 +8,12 @@ const loginWithEmailAndPassword = catchAsync(
   async (req: Request, res: Response) => {
     const result = await AuthService.loginWithEmailAndPassword(res, req.body);
 
+    console.log('from here', result)
     sendResponse(res, {
       success: true,
       statusCode: httpStatus.OK,
       message: "Login Successfully",
-      data: {
-          accessToken : result.userTokens.accessToken,
-          refreshToken : result.userTokens.refreshToken,
-          user: result.user
-      },
+      data: result
     });
   }
 );
