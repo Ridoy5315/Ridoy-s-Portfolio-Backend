@@ -12,6 +12,7 @@ router.post(
   BlogController.createBlog
 );
 
-router.get("/", BlogController.getAllBlogs )
+router.get("/", BlogController.getAllBlogs)
+router.get("/:id", BlogController.getBlogById)
 
 export const blogRouter = router;

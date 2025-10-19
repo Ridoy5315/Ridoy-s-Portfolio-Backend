@@ -27,9 +27,10 @@ model Blog {
   title       String
   description String
   content     String
-  file   String
+  file        String
   tags        String[]
-  isFeatured    Boolean  @default(false)
+  views       Int      @default(0)
+  isFeatured  Boolean  @default(false)
   author      String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
