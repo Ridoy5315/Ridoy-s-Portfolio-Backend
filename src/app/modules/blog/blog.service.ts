@@ -10,6 +10,17 @@ const createBlog = async(payload: Prisma.BlogCreateInput): Promise<Blog> => {
      return result;
 }
 
+const getAllBlogs = async() => {
+     const result = await prisma.blog.findMany({
+          orderBy: {
+            createdAt: "desc"
+        }
+     });
+
+     return result;
+}
+
 export const BlogService = {
-     createBlog
+     createBlog,
+     getAllBlogs
 }

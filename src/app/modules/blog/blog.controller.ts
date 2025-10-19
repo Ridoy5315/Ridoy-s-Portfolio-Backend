@@ -28,6 +28,18 @@ console.log(payload)
   });
 });
 
+const getAllBlogs = catchAsync(async (req: Request, res: Response) => {
+  const result = await BlogService.getAllBlogs()
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.CREATED,
+    message: "Blog Created Successfully",
+    data: result,
+  });
+});
+
 export const BlogController = {
   createBlog,
+  getAllBlogs
 };
