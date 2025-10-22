@@ -11,5 +11,6 @@ router.post(
   multerUpload.single("file"),
   ProjectController.createProject
 );
+router.get("/", ProjectController.getAllProjects)
 
 export const projectRouter = router;

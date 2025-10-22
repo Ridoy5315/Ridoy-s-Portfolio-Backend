@@ -10,6 +10,17 @@ const createProject = async(payload: Prisma.ProjectCreateInput): Promise<Project
      return result;
 }
 
+const getAllProjects = async() => {
+     const result = await prisma.project.findMany({
+          orderBy: {
+            createdAt: "desc"
+        }
+     });
+
+     return result;
+}
+
 export const ProjectService = {
-     createProject
+     createProject,
+     getAllProjects
 }
