@@ -5,6 +5,7 @@ import { blogRouter } from './app/modules/blog/blog.routes';
 import notFoundRoute from './app/middlewares/notFoundRoute';
 import { globalErrorHandler } from './app/middlewares/globalErrorHandler';
 import { authRouter } from './app/modules/auth/auth.routes';
+import { projectRouter } from './app/modules/project/project.routes';
 
 const app = express();
 
@@ -18,8 +19,9 @@ app.use(
 app.use(compression());
 app.use(express.json());
 
-app.use("/api/blog", blogRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/blog", blogRouter);
+app.use("/api/project", projectRouter);
 
 app.get("/", (req: Request, res: Response) => {
      res.status(200).json({

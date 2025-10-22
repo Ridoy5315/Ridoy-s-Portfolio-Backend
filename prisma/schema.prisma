@@ -35,3 +35,19 @@ model Blog {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
+
+model Project {
+  id                      Int      @id @default(autoincrement())
+  projectName             String
+  description             String
+  projectLiveLink         String
+  githubClientSideLink    String
+  githubServerSideLink    String
+  mainTechnologyStackUsed String[]
+  challengesFaced         String[]
+  improvementsAndPlans    String[]
+  thumbnail               String
+  author                  String
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+}

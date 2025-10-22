@@ -14,7 +14,7 @@ const createBlog = catchAsync(async (req: Request, res: Response) => {
     author,
     isFeatured: isFeatured === "true",
     tags: typeof tags === "string" ? tags.split(",").map(t => t.trim()) : tags,
-    file: req.file?.path,
+    file: req.file?.path ?? '',
   };
 
 console.log(payload)
