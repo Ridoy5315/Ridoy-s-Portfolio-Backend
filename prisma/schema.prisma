@@ -38,15 +38,16 @@ model Blog {
 
 model Project {
   id                      Int      @id @default(autoincrement())
-  projectName             String
-  description             String
-  projectLiveLink         String
-  githubClientSideLink    String
-  githubServerSideLink    String
+  projectName             String?
+  description             String?
+  projectLiveLink         String?
+  githubClientSideLink    String?
+  githubServerSideLink    String?
   mainTechnologyStackUsed String[]
   challengesFaced         String[]
   improvementsAndPlans    String[]
-  thumbnail               String
+  thumbnail               String?
+  views                   Int      @default(0)
   author                  String
   createdAt               DateTime @default(now())
   updatedAt               DateTime @updatedAt

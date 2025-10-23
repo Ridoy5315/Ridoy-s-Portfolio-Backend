@@ -12,5 +12,7 @@ router.post(
   ProjectController.createProject
 );
 router.get("/", ProjectController.getAllProjects)
+router.get("/:id", ProjectController.getProjectById)
+router.patch("/:id", multerUpload.single("file"), ProjectController.updateProjectById)
 
 export const projectRouter = router;
