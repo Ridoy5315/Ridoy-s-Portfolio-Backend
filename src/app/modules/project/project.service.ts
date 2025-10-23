@@ -47,9 +47,17 @@ const updateProjectById = async(id: number, payload: Prisma.ProjectCreateInput) 
      return result
 }
 
+const deleteProjectById = async(id: number) => {
+     const result = await prisma.project.delete({
+          where: {id}
+     })
+     return result
+}
+
 export const ProjectService = {
      createProject,
      getAllProjects,
      getProjectById,
-     updateProjectById
+     updateProjectById,
+     deleteProjectById
 }
