@@ -39,8 +39,17 @@ const getBlogById = async(id: number) => {
      return result
 }
 
+const updateBlogById = async(id: number, payload: Prisma.BlogCreateInput) => {
+     const result = await prisma.blog.update({
+          where: {id},
+          data: payload
+     })
+     return result
+}
+
 export const BlogService = {
      createBlog,
      getAllBlogs,
-     getBlogById
+     getBlogById,
+     updateBlogById
 }

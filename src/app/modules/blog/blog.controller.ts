@@ -13,7 +13,7 @@ const createBlog = catchAsync(async (req: Request, res: Response) => {
     content,
     author,
     isFeatured: isFeatured === "true",
-    tags: typeof tags === "string" ? tags.split(",").map(t => t.trim()) : tags,
+    tags: JSON.parse(tags),
     file: req.file?.path ?? '',
   };
 
@@ -55,8 +55,41 @@ const getBlogById = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const updateBlogById = catchAsync(async (req: Request, res: Response) => {
+  const { title, description, content, author, isFeatured, tags } = req.body;
+
+  const payload: any = {};
+
+  if (title !== undefined) payload.title = title;
+  if (description !== undefined) payload.description = description;
+  if (content !== undefined) payload.content = content;
+  if (isFeatured !== undefined) payload.isFeatured = isFeatured === "true";
+
+  if (tags !== undefined)
+    payload.tags = JSON.parse(tags);
+
+  if (author !== undefined) payload.author = author;
+
+  if (req.file?.path) {
+    payload.file = req.file.path;
+  }
+  const result = await BlogService.updateBlogById(Number(req.params.id), payload)
+
+  if(!result) {
+   throw new AppError(httpStatus.BAD_REQUEST, "Blog not found");
+  }
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.CREATED,
+    message: "Blog updated Successfully",
+    data: result,
+  });
+});
+
 export const BlogController = {
   createBlog,
   getAllBlogs,
-  getBlogById
+  getBlogById,
+  updateBlogById
 };
