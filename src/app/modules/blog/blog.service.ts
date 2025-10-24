@@ -47,9 +47,17 @@ const updateBlogById = async(id: number, payload: Prisma.BlogCreateInput) => {
      return result
 }
 
+const deleteBlogById = async(id: number) => {
+     const result = await prisma.blog.delete({
+          where: {id}
+     })
+     return result
+}
+
 export const BlogService = {
      createBlog,
      getAllBlogs,
      getBlogById,
-     updateBlogById
+     updateBlogById,
+     deleteBlogById
 }

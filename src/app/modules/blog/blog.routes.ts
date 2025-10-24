@@ -15,5 +15,6 @@ router.post(
 router.get("/", BlogController.getAllBlogs)
 router.get("/:id", BlogController.getBlogById)
 router.patch("/:id", multerUpload.single("file"), BlogController.updateBlogById)
+router.delete("/:id", BlogController.deleteBlogById)
 
 export const blogRouter = router;
